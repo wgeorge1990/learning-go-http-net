@@ -5,18 +5,19 @@
     <title>Learning Post Forms in Go http/net</title>
 </head>
 <body>
-{{if .}}
-<main>
-    <p><strong>
-            variable names
-        </strong>
-    (identifiers) and <em>values</em>:</p>
-    {{range $key, $value := .}}
-    <p><strong>{{$key}}</strong></p>
-    <ul>{{range $value}}<li><em>{{.}}</em></li>{{end}}</ul>
+<ul>
+    <li>{{if .Method}}<p>The request method: {{.Method}}</p>{{end}}</li>
+    <li>{{if .Header}}<p>The request Header: {{.Header}}</p>{{end}}</li>
+    <li> {{if .Host}}<p>The request Host: {{.Host}}</p>{{end}}</li>
+    <li>{{if .ContentLength}}<p>The request ContentLength: {{.ContentLength}}</p>{{end}}</li>
+    <li>{{if .URL}}<p>The request URL: {{.URL}}</p>{{end}}</li>
+    <li>{{if .Submissions}}<p><strong>Variable name</strong>(identifiers) and <em>values</em>:</p></li>
+        {{range $key, $value := .Submissions}}
+            <p><strong>{{$key}}</strong></p>
+            <ul>{{range $value}}<li><em>{{.}}</em></li>{{end}}</ul>
+        {{end}}
     {{end}}
-</main>
-{{end}}
+</ul>
 
 <form action="/" method="POST">
     <input type="text" name="firstname" placeholder="first name" autocomplete="off">
@@ -24,6 +25,7 @@
     <input type="text" name="age" placeholder="age" autocomplete="off">
     <input type="text" name="email" placeholder="email" autocomplete="off">
     <input type="text" name="phone number" placeholder="phone" autocomplete="off">
+    <input type="text" name="image" placeholder="image link" autocomplete="off">
     <input type="submit" name="submit-btn" value="submit button">
 </form>
 
