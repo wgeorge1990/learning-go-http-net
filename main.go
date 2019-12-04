@@ -14,6 +14,8 @@ import (
 type person int
 
 func (p person) ServeHTTP(w http.ResponseWriter, req *http.Request) {
+	w.Header().Set("firstname", "william")
+	w.Header().Set("lastname", "george")
 	err := req.ParseForm()
 	if err != nil {
 		log.Fatalln(err)
@@ -45,10 +47,21 @@ func init() {
 }
 
 func main() {
-	var p person
-	http.ListenAndServe(":8080", p)
+	var personOne person
+	http.ListenAndServe(":8080", personOne)
 }
 
 //type handler interface {
 //	ServeHTTP(ResponseWriter, *request)
 //}
+
+// func (r *Request) formValue(key string) string {
+// pass in form key and get back the value. This is a helper method when dealing with forms.
+//}
+
+//  type responseWriter interface {
+//  	has below three methods:
+//  	1.	Header() Header
+//  	2.	write([]byte) (int, err)
+//  	3.	writeHeader(int)
+//  }
